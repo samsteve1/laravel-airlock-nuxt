@@ -58,6 +58,10 @@ export default {
              url: '/api/user',
              method: 'get',
              propertyName: false
+           },
+           logout:{
+             url: '/logout',
+             method: 'post'
            }
         },
         tokenRequired: false,

@@ -15,7 +15,7 @@
             </nuxt-link>
             </li>
             <li class="mr-4">
-                <a href="#" class="text-gray-800 font-medium">
+                <a href="#" class="text-gray-800 font-medium" @click.prevent="signOut">
                 Singout
             </a>
             </li>
@@ -38,6 +38,16 @@
 
 <script>
 export default {
-    
+    methods: {
+        async signOut() {
+           try {
+               await this.$auth.logout()
+               this.$router.replace({name: 'index'})
+           } catch (error) {
+               console.log(error)
+           }
+            
+        }
+    },
 }
 </script>
