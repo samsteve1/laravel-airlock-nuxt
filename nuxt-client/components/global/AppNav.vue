@@ -8,9 +8,10 @@
             </li>
         </ul>
         <ul class="flex items-center">
-            <li class="mr-4">
+            <template v-if="$auth.loggedIn">
+                <li class="mr-4">
                 <nuxt-link :to="{name: 'account'}" class="text-gray-800 font-medium">
-                Name
+                {{ $auth.user.name }}
             </nuxt-link>
             </li>
             <li class="mr-4">
@@ -18,7 +19,9 @@
                 Singout
             </a>
             </li>
-            <li class="mr-4">
+            </template>
+            <template v-else>
+                <li class="mr-4">
                 <nuxt-link :to="{name: 'auth-signin'}" class="text-gray-800 font-medium">
                 Sign in
             </nuxt-link>
@@ -28,6 +31,7 @@
                 Sign up
             </a>
             </li>
+            </template>
         </ul>
     </div>
 </template>

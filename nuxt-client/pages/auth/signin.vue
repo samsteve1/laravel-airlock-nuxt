@@ -4,18 +4,18 @@
             Signn In
         </h1>
         
-        <form action="#" method="POST" class="bg-white rounded-lg p-8 w-full md:w-6/12 lg:w-3/12 shadow-xl">
+        <form action="#" method="POST" class="bg-white rounded-lg p-8 w-full md:w-6/12 lg:w-3/12 shadow-xl" @submit.prevent="login">
             <div class="mb-4">
                 <label for="email" class="block mb-2 text-gray-500 uppercase text-sm font-bold tracking-tight">
                     Email
                 </label>
-                <input type="text" name="email" id="email" class="border-2 border-gray-400 rounded px-3 py-2 w-full">
+                <input type="text" name="email" id="email" class="border-2 border-gray-400 rounded px-3 py-2 w-full" v-model="form.email">
             </div>
             <div class="mb-6">
                 <label for="passsword" class="block mb-2 text-gray-500 uppercase text-sm font-bold tracking-tight">
                     Password
                 </label>
-                <input type="password" name="password" id="password" class="border-2 border-gray-400 rounded px-3 py-2 w-full">
+                <input type="password" name="password" id="password" class="border-2 border-gray-400 rounded px-3 py-2 w-full" v-model="form.password">
             </div>
             <div>
                 <button type="submit" class="w-full bg-blue-500 text-white px-6 py-3 rounded uppercase font-bold">
@@ -27,6 +27,24 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            form:{
+                email: '',
+                password: ''
+            }
+        }
+    },
+    methods: {
+        async login(){
+            try{
+                await this.$axios.$get('/sanctum/csrf-cookie')
+                await this.$auth.loginWith('local', {data: this.form})
+                this.$router.replace({name: 'index'})
+            } catch(e){
+                console.log(e)
+            }
+        }
+    },
 }
 </script>

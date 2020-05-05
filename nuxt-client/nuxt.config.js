@@ -50,7 +50,15 @@ export default {
     strategies:{
       local:{
         endpoints:{
-
+           login:{
+             url: '/login',
+             method: 'post'
+           },
+           user: {
+             url: '/api/user',
+             method: 'get',
+             propertyName: false
+           }
         },
         tokenRequired: false,
         tokenType: false
@@ -62,7 +70,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    baseURL: process.env.BASE_URL + '/',
+    baseURL: 'http://localhost:8000/',
     credentials: true
   },
   /*
